@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKMessageViewController.h"
+@class MKMessageViewController;
 
 @interface MKMessageTable : UITableView
+@property (strong, nonatomic) MKMessageViewController *messageVC;
 
 @end
