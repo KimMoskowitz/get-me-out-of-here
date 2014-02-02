@@ -27,6 +27,8 @@
 		E0235019189DA0ED008B410A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0234FF5189DA0ED008B410A /* UIKit.framework */; };
 		E0235021189DA0ED008B410A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E023501F189DA0ED008B410A /* InfoPlist.strings */; };
 		E0235023189DA0ED008B410A /* GetMeOutOfHereTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E0235022189DA0ED008B410A /* GetMeOutOfHereTests.m */; };
+		E04D5277189E0E5F0060D42C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E04D5275189E0E5F0060D42C /* Model.xcdatamodeld */; };
+		E04D527A189E0EAC0060D42C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = E04D5279189E0EAC0060D42C /* Contact.m */; };
 		E0700FF1189DD1E80061247C /* MKContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0700FEF189DD1E80061247C /* MKContactViewController.m */; };
 		E0700FF2189DD1E80061247C /* MKContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0700FF0189DD1E80061247C /* MKContactViewController.xib */; };
 		E0700FF5189DD3050061247C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0700FF3189DD3050061247C /* AddressBook.framework */; };
@@ -74,6 +76,9 @@
 		E023501E189DA0ED008B410A /* GetMeOutOfHereTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GetMeOutOfHereTests-Info.plist"; sourceTree = "<group>"; };
 		E0235020189DA0ED008B410A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E0235022189DA0ED008B410A /* GetMeOutOfHereTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMeOutOfHereTests.m; sourceTree = "<group>"; };
+		E04D5276189E0E5F0060D42C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E04D5278189E0EAC0060D42C /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		E04D5279189E0EAC0060D42C /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		E0700FEE189DD1E80061247C /* MKContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKContactViewController.h; sourceTree = "<group>"; };
 		E0700FEF189DD1E80061247C /* MKContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKContactViewController.m; sourceTree = "<group>"; };
 		E0700FF0189DD1E80061247C /* MKContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKContactViewController.xib; sourceTree = "<group>"; };
@@ -218,6 +223,9 @@
 		E0700FF7189DE1410061247C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E04D5275189E0E5F0060D42C /* Model.xcdatamodeld */,
+				E04D5278189E0EAC0060D42C /* Contact.h */,
+				E04D5279189E0EAC0060D42C /* Contact.m */,
 				E0700FF8189DE1890061247C /* MKContact.h */,
 				E0700FF9189DE1890061247C /* MKContact.m */,
 			);
@@ -331,6 +339,8 @@
 				99F5E10F189DCCC3008BC16D /* MKHelpButton.m in Sources */,
 				E0235008189DA0ED008B410A /* MKDataViewController.m in Sources */,
 				E0234FFE189DA0ED008B410A /* main.m in Sources */,
+				E04D527A189E0EAC0060D42C /* Contact.m in Sources */,
+				E04D5277189E0E5F0060D42C /* Model.xcdatamodeld in Sources */,
 				E0700FF1189DD1E80061247C /* MKContactViewController.m in Sources */,
 				E0700FFA189DE1890061247C /* MKContact.m in Sources */,
 			);
@@ -553,6 +563,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E04D5275189E0E5F0060D42C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E04D5276189E0E5F0060D42C /* Model.xcdatamodel */,
+			);
+			currentVersion = E04D5276189E0E5F0060D42C /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = ../Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E0234FE6189DA0ED008B410A /* Project object */;
 }

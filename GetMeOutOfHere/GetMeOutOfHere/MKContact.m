@@ -15,4 +15,11 @@
 @synthesize lastName;
 @synthesize phone;
 
+- (instancetype)init
+{
+    self = [super init];
+
+    return self;
+}
+
 @end
