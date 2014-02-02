@@ -7,6 +7,7 @@
 //
 
 #import "MKContactViewController.h"
+#import "MKCell.h"
 
 @interface MKContactViewController ()
 
@@ -30,7 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-    }
+    }//contactsArray[0].fullName or .phone
     return self;
 }
 
@@ -48,6 +49,7 @@
     [fetchRequest setEntity:entity];
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+
 
 }
 
@@ -68,35 +70,46 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;//[contactsArray count];
+    return [contactsArray count];//[contactsArray count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"MainCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         // Make sure to change the default style to the next one if you want to manage to display text
         // in the detailsTextLabel area.
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
 	// Configure the cell.
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
+
+    if(contactsArray.count == 0)
+    {
+        cell.textLabel.text = @"";
+        return cell;
+    }
+    
     // Specify the current row.
     NSInteger currentRow = [indexPath row];
-    
+
     // Display the selected contact's info.
     // First the full name, then the phone number and finally the e-mail address.
     NSLog(((Contact *)[contactsArray objectAtIndex:currentRow]).fullName);
-    [[cell textLabel] setText:@"text"];//((Contact *)[contactsArray objectAtIndex:currentRow]).fullName];
+//    [[cell textLabel] setText:@"text"];//((Contact *)[contactsArray objectAtIndex:currentRow]).fullName];
+//
+//    // The rest info will be displayed in the detailsTextLabel of the cell.
+//    [[cell detailTextLabel] setText:@"detail"];//((Contact *)[contactsArray objectAtIndex:currentRow]).phone];
     
-    // The rest info will be displayed in the detailsTextLabel of the cell.
-    [[cell detailTextLabel] setText:@"detail"];//((Contact *)[contactsArray objectAtIndex:currentRow]).phone];
+    cell.textLabel.text = ((Contact *)[contactsArray objectAtIndex:currentRow]).fullName;
+//    MKCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MKCell"];
+//    
+//    NSUInteger row = [indexPath row];
+//    cell.
     
     return cell;
 }
