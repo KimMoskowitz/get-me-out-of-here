@@ -44,6 +44,16 @@
 }
 
 - (IBAction)helpButtonAction:(id)sender {
-    MFMessageComposeViewController
+    MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
+    [textComposer setMessageComposeDelegate:self];
+    
+    [textComposer setRecipients:[NSArray arrayWithObjects:/*something here,*/ nil]];
+    [textComposer setBody:@"I'm at XYZ. Please get me out of here"];
+    [self presentViewController:textComposer animated:YES completion:NULL];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 @end

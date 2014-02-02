@@ -96,7 +96,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99F5E109189DBEB0008BC16D /* button */ = {
+		99F5E109189DBEB0008BC16D /* Button */ = {
 			isa = PBXGroup;
 			children = (
 				99F5E104189DBEA4008BC16D /* MKButtonViewController.h */,
@@ -105,7 +105,7 @@
 				99F5E10D189DCCC3008BC16D /* MKHelpButton.h */,
 				99F5E10E189DCCC3008BC16D /* MKHelpButton.m */,
 			);
-			name = button;
+			name = Button;
 			sourceTree = "<group>";
 		};
 		E0234FE5189DA0ED008B410A = {
@@ -151,7 +151,7 @@
 				E0235009189DA0ED008B410A /* MKModelController.h */,
 				E023500A189DA0ED008B410A /* MKModelController.m */,
 				E023500C189DA0ED008B410A /* Main.storyboard */,
-				99F5E109189DBEB0008BC16D /* button */,
+				99F5E109189DBEB0008BC16D /* Button */,
 				E023500F189DA0ED008B410A /* Images.xcassets */,
 				E0234FF8189DA0ED008B410A /* Supporting Files */,
 			);
@@ -235,6 +235,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = KimMoskowitz;
 				TargetAttributes = {
+					E0234FED189DA0ED008B410A = {
+						DevelopmentTeam = CBME5RD7L2;
+					};
 					E0235014189DA0ED008B410A = {
 						TestTargetID = E0234FED189DA0ED008B410A;
 					};
@@ -419,10 +422,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GetMeOutOfHere/GetMeOutOfHere-Prefix.pch";
 				INFOPLIST_FILE = "GetMeOutOfHere/GetMeOutOfHere-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -432,10 +438,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GetMeOutOfHere/GetMeOutOfHere-Prefix.pch";
 				INFOPLIST_FILE = "GetMeOutOfHere/GetMeOutOfHere-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
