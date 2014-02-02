@@ -15,6 +15,7 @@
 		99F5E114189E4304008BC16D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F5E113189E4304008BC16D /* CoreLocation.framework */; };
 		99F5E119189E5849008BC16D /* MKMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F5E117189E5849008BC16D /* MKMessageViewController.m */; };
 		99F5E11A189E5849008BC16D /* MKMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99F5E118189E5849008BC16D /* MKMessageViewController.xib */; };
+		99F5E11D189E7B9F008BC16D /* MKMessageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F5E11C189E7B9F008BC16D /* MKMessageTable.m */; };
 		E010273B189E74E400C2AF36 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E0102729189E74E400C2AF36 /* AFHTTPRequestOperation.m */; };
 		E010273C189E74E400C2AF36 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E010272B189E74E400C2AF36 /* AFHTTPRequestOperationManager.m */; };
 		E010273D189E74E400C2AF36 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E010272D189E74E400C2AF36 /* AFHTTPSessionManager.m */; };
@@ -73,6 +74,8 @@
 		99F5E116189E5849008BC16D /* MKMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMessageViewController.h; sourceTree = "<group>"; };
 		99F5E117189E5849008BC16D /* MKMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessageViewController.m; sourceTree = "<group>"; };
 		99F5E118189E5849008BC16D /* MKMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKMessageViewController.xib; sourceTree = "<group>"; };
+		99F5E11B189E7B9F008BC16D /* MKMessageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMessageTable.h; sourceTree = "<group>"; };
+		99F5E11C189E7B9F008BC16D /* MKMessageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessageTable.m; sourceTree = "<group>"; };
 		E0102728189E74E400C2AF36 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		E0102729189E74E400C2AF36 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		E010272A189E74E400C2AF36 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 				99F5E116189E5849008BC16D /* MKMessageViewController.h */,
 				99F5E117189E5849008BC16D /* MKMessageViewController.m */,
 				99F5E118189E5849008BC16D /* MKMessageViewController.xib */,
+				99F5E11B189E7B9F008BC16D /* MKMessageTable.h */,
+				99F5E11C189E7B9F008BC16D /* MKMessageTable.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				E010273F189E74E400C2AF36 /* AFSecurityPolicy.m in Sources */,
 				E0234FFE189DA0ED008B410A /* main.m in Sources */,
 				E010273E189E74E400C2AF36 /* AFNetworkReachabilityManager.m in Sources */,
+				99F5E11D189E7B9F008BC16D /* MKMessageTable.m in Sources */,
 				E0102743189E74E400C2AF36 /* AFURLSessionManager.m in Sources */,
 				E04D527A189E0EAC0060D42C /* Contact.m in Sources */,
 				E04D5277189E0E5F0060D42C /* Model.xcdatamodeld in Sources */,

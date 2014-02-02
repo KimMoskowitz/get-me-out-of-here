@@ -289,7 +289,7 @@
     backgroundView.hidden = NO;
     [UIView beginAnimations:@"animationOff" context:NULL];
     [UIView setAnimationDuration:2.4f];
-    [backgroundView setFrame:CGRectMake(95, 316, 130, 1)];
+    [backgroundView setFrame:CGRectMake(95, 316, 130, 0)];
     [UIView commitAnimations];
 }
 
@@ -300,6 +300,5 @@
     [UIView setAnimationDuration:0.0f];
     [backgroundView setFrame:CGRectMake(95, 143, 130, 173)];
     [UIView commitAnimations];
-    NSLog(@"stop animation");
 }
 @end
