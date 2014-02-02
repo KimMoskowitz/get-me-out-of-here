@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    pageIndex = 0;
+    pageIndex = 1;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
