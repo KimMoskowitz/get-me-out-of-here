@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Get Me Out Of Here": {
+            "applicationId": "9bEBniwvMk14gQyBN3disSKhYAbumP9bfdq7ms2D", 
+            "masterKey": "lyP7MkNQynBjGKYaeK72H3PeHepaGM8Fk1Jnn7Nb"
+        }, 
+        "_default": {
+            "link": "Get Me Out Of Here"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.16"
+    }
+}
