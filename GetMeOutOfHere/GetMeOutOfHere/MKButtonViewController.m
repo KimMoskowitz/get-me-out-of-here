@@ -44,6 +44,6 @@
 }
 
 - (IBAction)helpButtonAction:(id)sender {
-    NSLog(@"button pressed");
+    MFMessageComposeViewController
 }
 @end
