@@ -51,16 +51,6 @@
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
     
-    
-    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
-    
-    msg.to = @"richard.kim@tufts.edu";
-    msg.subject = @"NOTICE: Get Me Out Of Here";
-    msg.from = @"getmeoutofhereapp@gmail.com";
-    msg.text = @"hello world";
-    msg.html = @"<h1>hello world!</h1>";
-    
-    [msg sendWithWeb];
 
 
 }
@@ -82,7 +72,6 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"asdfasDFASDFASDFASDF");
     return [contactsArray count];//[contactsArray count];
 }
 
@@ -176,54 +165,65 @@
 #pragma mark - AddressBook Delegate Methods
 
 -(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
-    return YES;
-}
-
-
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
+    
+    NSString* name =
+    (__bridge_transfer NSString *)ABRecordCopyCompositeName(person);
+    
+    ABMutableMultiValueRef phones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    NSArray *numbers =
+    (__bridge_transfer NSArray *)ABMultiValueCopyArrayOfAllValues(phones);
     
     
-    // Get the first and the last name. Actually, copy their values using the person object and the appropriate
-    // properties into two string variables equivalently.
-    // Watch out the ABRecordCopyValue method below. Also, notice that we cast to NSString *.
-    NSString *firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-    NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-    
-    // Compose the full name.
-    NSString *fullName = @"";
-    // Before adding the first and the last name in the fullName string make sure that these values are filled in.
-    if (firstName != nil) {
-        fullName = [fullName stringByAppendingString:firstName];
-    }
-    if (lastName != nil) {
-        fullName = [fullName stringByAppendingString:@" "];
-        fullName = [fullName stringByAppendingString:lastName];
+    ABMultiValueIdentifier identifier;
+    for( int i = 0; i < numbers.count; i++ ) {
+        if( CFStringCompare( ABMultiValueCopyLabelAtIndex(phones, i),
+                            kABPersonPhoneMobileLabel, 1 ) == 0 ) {
+            identifier = ABMultiValueGetIdentifierAtIndex(phones, i);
+        }
     }
     
+    NSString *phone =
+    (__bridge_transfer NSString *)
+    ABMultiValueCopyValueAtIndex(phones,
+                                 ABMultiValueGetIndexForIdentifier(phones, identifier));
+    NSLog(@"Mobile = %@",phone);
+    
+    ABMutableMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
+    
+    NSArray *addresses =
+    (__bridge_transfer NSArray *)ABMultiValueCopyArrayOfAllValues(emails);
 
+    ABMultiValueIdentifier identifier2;
+    for( int j = 0; j < addresses.count; j++ ) {
+        if( CFStringCompare( ABMultiValueCopyLabelAtIndex(emails, j),
+                            kABPersonPhoneMobileLabel, 1 ) == 0 ) {
+            identifier2 = ABMultiValueGetIdentifierAtIndex(emails, j);
+        }
+    }
     
-    // Get the multivalue e-mail property.
-    CFTypeRef multivalue = ABRecordCopyValue(person, property);
-    
-    CFIndex index = ABMultiValueGetIndexForIdentifier(multivalue, identifier);
-    
-    // Copy the e-mail value into a string.
-    NSString *phone = (__bridge NSString *)ABMultiValueCopyValueAtIndex(multivalue, index);
+    NSString *email =
+    (__bridge_transfer NSString *)
+    ABMultiValueCopyValueAtIndex(emails,
+                                 ABMultiValueGetIndexForIdentifier(emails, identifier));
+    NSLog(@"Email = %@",email);
+
+
     
     Contact *newContact = [NSEntityDescription
-                     insertNewObjectForEntityForName:@"Contact"
-                     inManagedObjectContext:self.managedObjectContext];
-    [newContact setFirstName:firstName];
-    [newContact setLastName:lastName];
-    [newContact setFullName:fullName];
+                           insertNewObjectForEntityForName:@"Contact"
+                           inManagedObjectContext:self.managedObjectContext];
+    //[newContact setFirstName:firstName];
+    //[newContact setLastName:lastName];
+    [newContact setFullName:name];
     [newContact setPhone:phone];
+    [newContact setEmail:email];
     NSError *error;
     [contactsArray addObject:newContact];
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     
-
+    
     
     
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -238,19 +238,27 @@
     {
         NSLog(con.fullName);
         NSLog(con.phone);
+        NSLog(con.email);
         
     }
-//    
-//    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
-//
-//    msg.to = @"jared.moskowitz@tufts.edu";
-//    msg.subject = @"NOTICE: Get Me Out Of Here";
-//    msg.from = @"jaredmoskowitz123@gmail.com";
-//    msg.text = @"hello world";
-//    msg.html = @"<h1>hello world!</h1>";
-//    
-//    [msg sendWithWeb];
-//    NSLog(@"%u",[self.table count]);
+    
+    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
+    
+    NSString *message = @"You have been added as an emergency contact of ";
+    message = [message stringByAppendingString:name];
+    
+    NSString *message2 = @"<h6>You have been added as an emergency contact of ";
+    message2 = [message2 stringByAppendingString:name];
+    message2 = [message2 stringByAppendingString:@"<h6>"];
+    
+    msg.to = email;
+    msg.subject = @"NOTICE: Get Me Out Of Here";
+    msg.from = @"getmeoutofhereapp@gmail.com";
+    msg.text = @"You have been added as an emergency contact";
+    msg.html = @"<h1>You have been added as an emergency contact<h1>";
+    
+    [msg sendWithWeb];
+    
     // Reload the table to display the new data.
     [self.table reloadData];
     
@@ -258,7 +266,15 @@
     [contacts dismissViewControllerAnimated:YES completion:nil];
     
     
-	return NO;
+
+    
+    return NO;
+}
+
+
+-(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
+    
+    	return NO;
 }
 
 
