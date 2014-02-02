@@ -8,6 +8,8 @@
 
 #import "MKContactViewController.h"
 #import "MKCell.h"
+#import "sendgrid.h"
+#import "AFNetworking.h"
 
 @interface MKContactViewController ()
 
@@ -49,19 +51,17 @@
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
     
-//    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
-//    for(Contact *contact in tempArray)
-//    {
-//        Contact *newC = [[Contact alloc] init];
-//        [newC setFirstName:contact.firstName];
-//        [newC setLastName:contact.lastName];
-//        [newC setFullName:contact.fullName];
-//        [newC setPhone:contact.phone];
-//        [contactsArray addObject:newC];
-//    }
-//
-//    [self.table setDelegate:myTableDelegate];
-//    [self.table setDataSource:myTableDelegate];
+    
+    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
+    
+    msg.to = @"richard.kim@tufts.edu";
+    msg.subject = @"NOTICE: Get Me Out Of Here";
+    msg.from = @"getmeoutofhereapp@gmail.com";
+    msg.text = @"hello world";
+    msg.html = @"<h1>hello world!</h1>";
+    
+    [msg sendWithWeb];
+
 
 }
 
@@ -144,7 +144,8 @@
     // Set the e-mail property as the only one that we want to be displayed in the Address Book.
 	[contacts setDisplayedProperties:[NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty],
                                       [NSNumber numberWithInt:kABPersonFirstNameProperty],
-                                      [NSNumber numberWithInt:kABPersonLastNameProperty], nil]];
+                                      [NSNumber numberWithInt:kABPersonLastNameProperty],
+                                      [NSNumber numberWithInt:kABPersonEmailProperty], nil]];
     
     /*
      kABPersonBirthdayProperty
@@ -239,8 +240,16 @@
         NSLog(con.phone);
         
     }
-
-    
+//    
+//    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
+//
+//    msg.to = @"jared.moskowitz@tufts.edu";
+//    msg.subject = @"NOTICE: Get Me Out Of Here";
+//    msg.from = @"jaredmoskowitz123@gmail.com";
+//    msg.text = @"hello world";
+//    msg.html = @"<h1>hello world!</h1>";
+//    
+//    [msg sendWithWeb];
 //    NSLog(@"%u",[self.table count]);
     // Reload the table to display the new data.
     [self.table reloadData];
