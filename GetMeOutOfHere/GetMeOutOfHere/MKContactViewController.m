@@ -50,19 +50,6 @@
     [fetchRequest setEntity:entity];
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
-    
-    
-    sendgrid *msg = [sendgrid user:@"KimMoskowitz" andPass:@"Password42"];
-    
-    msg.to = @"richard.kim@tufts.edu";
-    msg.subject = @"NOTICE: Get Me Out Of Here";
-    msg.from = @"getmeoutofhereapp@gmail.com";
-    msg.text = @"hello world";
-    msg.html = @"<h1>hello world!</h1>";
-    
-    [msg sendWithWeb];
-
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,7 +69,6 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"asdfasDFASDFASDFASDF");
     return [contactsArray count];//[contactsArray count];
 }
 
