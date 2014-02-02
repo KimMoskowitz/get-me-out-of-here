@@ -38,8 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
+
    
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -50,6 +49,8 @@
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
 
+//    [self.table setDelegate:myTableDelegate];
+//    [self.table setDataSource:myTableDelegate];
 
 }
 
@@ -70,6 +71,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"asdfasDFASDFASDFASDF");
     return [contactsArray count];//[contactsArray count];
 }
 
@@ -237,8 +239,10 @@
         
     }
 
+    
+//    NSLog(@"%u",[self.table count]);
     // Reload the table to display the new data.
-    [table reloadData];
+    [self.table reloadData];
     
     // Dismiss the contacts view controller.
     [contacts dismissViewControllerAnimated:YES completion:nil];

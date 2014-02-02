@@ -12,7 +12,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "Contact.h"
 
-@interface MKContactViewController : MKDataViewController <ABPeoplePickerNavigationControllerDelegate>
+@interface MKContactViewController : MKDataViewController <ABPeoplePickerNavigationControllerDelegate> 
 
 @property (nonatomic, retain) IBOutlet UITableView *table;
 @property (nonatomic, retain) NSMutableArray *contactsArray;
