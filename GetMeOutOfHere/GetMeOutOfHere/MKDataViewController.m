@@ -7,6 +7,7 @@
 //
 
 #import "MKDataViewController.h"
+#import "MKButtonViewController.h"
 
 @interface MKDataViewController ()
 
@@ -29,7 +30,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.dataLabel.text = [self.dataObject description];
+//    self.dataLabel.text = [self.dataObject description];
 }
 
 @end

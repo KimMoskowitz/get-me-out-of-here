@@ -7,7 +7,7 @@
 //
 
 #import "MKModelController.h"
-
+#import "MKButtonViewController.h"
 #import "MKDataViewController.h"
 
 /*
@@ -45,7 +45,10 @@
     
     // Create a new view controller and pass suitable data.
     MKDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"MKDataViewController"];
-    dataViewController.dataObject = self.pageData[index];
+//    dataViewController.dataObject = self.pageData[index];
+    
+    dataViewController = [[MKButtonViewController alloc]init];
+    
     return dataViewController;
 }
 

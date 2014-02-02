@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99F5E103189DBB5D008BC16D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F5E102189DBB5D008BC16D /* MessageUI.framework */; };
+		99F5E107189DBEA4008BC16D /* MKButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F5E105189DBEA4008BC16D /* MKButtonViewController.m */; };
+		99F5E108189DBEA4008BC16D /* MKButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99F5E106189DBEA4008BC16D /* MKButtonViewController.xib */; };
+		99F5E10F189DCCC3008BC16D /* MKHelpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F5E10E189DCCC3008BC16D /* MKHelpButton.m */; };
 		E0234FF2189DA0ED008B410A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0234FF1189DA0ED008B410A /* Foundation.framework */; };
 		E0234FF4189DA0ED008B410A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0234FF3189DA0ED008B410A /* CoreGraphics.framework */; };
 		E0234FF6189DA0ED008B410A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0234FF5189DA0ED008B410A /* UIKit.framework */; };
@@ -36,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		99F5E102189DBB5D008BC16D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		99F5E104189DBEA4008BC16D /* MKButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKButtonViewController.h; sourceTree = "<group>"; };
+		99F5E105189DBEA4008BC16D /* MKButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKButtonViewController.m; sourceTree = "<group>"; };
+		99F5E106189DBEA4008BC16D /* MKButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKButtonViewController.xib; sourceTree = "<group>"; };
+		99F5E10D189DCCC3008BC16D /* MKHelpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKHelpButton.h; sourceTree = "<group>"; };
+		99F5E10E189DCCC3008BC16D /* MKHelpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKHelpButton.m; sourceTree = "<group>"; };
 		E0234FEE189DA0ED008B410A /* GetMeOutOfHere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetMeOutOfHere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0234FF1189DA0ED008B410A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E0234FF3189DA0ED008B410A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99F5E103189DBB5D008BC16D /* MessageUI.framework in Frameworks */,
 				E0234FF4189DA0ED008B410A /* CoreGraphics.framework in Frameworks */,
 				E0234FF6189DA0ED008B410A /* UIKit.framework in Frameworks */,
 				E0234FF2189DA0ED008B410A /* Foundation.framework in Frameworks */,
@@ -85,6 +96,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99F5E109189DBEB0008BC16D /* button */ = {
+			isa = PBXGroup;
+			children = (
+				99F5E104189DBEA4008BC16D /* MKButtonViewController.h */,
+				99F5E105189DBEA4008BC16D /* MKButtonViewController.m */,
+				99F5E106189DBEA4008BC16D /* MKButtonViewController.xib */,
+				99F5E10D189DCCC3008BC16D /* MKHelpButton.h */,
+				99F5E10E189DCCC3008BC16D /* MKHelpButton.m */,
+			);
+			name = button;
+			sourceTree = "<group>";
+		};
 		E0234FE5189DA0ED008B410A = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +130,7 @@
 		E0234FF0189DA0ED008B410A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99F5E102189DBB5D008BC16D /* MessageUI.framework */,
 				E0234FF1189DA0ED008B410A /* Foundation.framework */,
 				E0234FF3189DA0ED008B410A /* CoreGraphics.framework */,
 				E0234FF5189DA0ED008B410A /* UIKit.framework */,
@@ -127,6 +151,7 @@
 				E0235009189DA0ED008B410A /* MKModelController.h */,
 				E023500A189DA0ED008B410A /* MKModelController.m */,
 				E023500C189DA0ED008B410A /* Main.storyboard */,
+				99F5E109189DBEB0008BC16D /* button */,
 				E023500F189DA0ED008B410A /* Images.xcassets */,
 				E0234FF8189DA0ED008B410A /* Supporting Files */,
 			);
@@ -241,6 +266,7 @@
 			files = (
 				E0235010189DA0ED008B410A /* Images.xcassets in Resources */,
 				E0234FFC189DA0ED008B410A /* InfoPlist.strings in Resources */,
+				99F5E108189DBEA4008BC16D /* MKButtonViewController.xib in Resources */,
 				E023500E189DA0ED008B410A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +288,9 @@
 			files = (
 				E023500B189DA0ED008B410A /* MKModelController.m in Sources */,
 				E0235005189DA0ED008B410A /* MKRootViewController.m in Sources */,
+				99F5E107189DBEA4008BC16D /* MKButtonViewController.m in Sources */,
 				E0235002189DA0ED008B410A /* MKAppDelegate.m in Sources */,
+				99F5E10F189DCCC3008BC16D /* MKHelpButton.m in Sources */,
 				E0235008189DA0ED008B410A /* MKDataViewController.m in Sources */,
 				E0234FFE189DA0ED008B410A /* main.m in Sources */,
 			);
@@ -473,6 +501,7 @@
 				E0235028189DA0ED008B410A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E0235029189DA0ED008B410A /* Build configuration list for PBXNativeTarget "GetMeOutOfHereTests" */ = {
 			isa = XCConfigurationList;
@@ -481,6 +510,7 @@
 				E023502B189DA0ED008B410A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
