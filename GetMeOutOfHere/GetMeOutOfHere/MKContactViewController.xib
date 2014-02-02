@@ -27,6 +27,9 @@
                 <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozV-xj-Jw4">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textAttributes key="titleTextAttributes">
+                        <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                    </textAttributes>
                     <items>
                         <navigationItem title="Contacts" id="Acp-54-Z7A">
                             <barButtonItem key="leftBarButtonItem" systemItem="edit" id="rNk-jw-dZj"/>
