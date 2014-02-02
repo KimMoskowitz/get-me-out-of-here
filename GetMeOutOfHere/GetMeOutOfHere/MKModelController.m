@@ -68,6 +68,8 @@
         return nil;
     }
     
+    dataViewController.pageIndex = index;
+    
     return dataViewController;
 }
 
@@ -83,6 +85,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     NSUInteger index = (dataViewController.pageIndex);
+    NSLog(@"BEFORE INDEX: %u", index);
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -93,11 +96,11 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
+    NSLog(@"AFTER INDEX: %u", index);
     NSUInteger index = (dataViewController.pageIndex);
     if (index == NSNotFound) {
         return nil;
     }
-    
     index++;
     if (index == [self.pageData count]) {
         return nil;

@@ -26,6 +26,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize myLongitude;
 @synthesize myLatitude;
+@synthesize backgroundView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,8 +60,14 @@
     
     CALayer *btnLayer = [helpButton layer];
     [btnLayer setMasksToBounds:YES];
-    [btnLayer setCornerRadius:2.0f];
-    [helpButton setAlpha:0.9];
+    [btnLayer setCornerRadius:5.0f];
+    
+    CALayer *Layer = [backgroundView layer];
+    [Layer setMasksToBounds:YES];
+    [Layer setCornerRadius:5.0f];
+    backgroundView.hidden = YES;
+    
+    [helpButton setAlpha:0.4];
     //change button size and press down color
     
     
@@ -82,45 +89,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-<<<<<<< HEAD
-
-=======
-- (IBAction)helpButtonAction:(id)sender {
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Contact"
-                                   inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSError *error;
-    self.contactArray = [context executeFetchRequest:fetchRequest error:&error];
-    
-    MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
-    [textComposer setMessageComposeDelegate:self];
-    
-    NSMutableArray *numbersTemp = [[NSMutableArray alloc] init];
-    for(Contact *contact in contactArray)
-    {
-        [numbersTemp addObject:contact.phone];
-    }
-    
-    NSArray *numbers = [numbersTemp copy];
-    
-    NSString *myLocation = @"I'm at ";
-    myLocation = [myLocation stringByAppendingString:locationName];
-    myLocation = [myLocation stringByAppendingString:@" ("];
-    myLocation = [myLocation stringByAppendingString:myLatitude];
-    myLocation = [myLocation stringByAppendingString:@", "];
-    myLocation = [myLocation stringByAppendingString:myLongitude];
-    myLocation = [myLocation stringByAppendingString:@"). Please get me out of here"];
-    
-    [textComposer setRecipients:numbers];
-    [textComposer setBody:myLocation];
-    [self presentViewController:textComposer animated:YES completion:NULL];
-}
->>>>>>> d794bc3717460d9307b10edded92294acfd9af4a
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -267,14 +235,21 @@
 }
 
 - (IBAction)helpButtonAction:(id)sender {
-    [helpButton setAlpha:0.9];
     [self stopAnimation];
 }
 
 -(void) handleLongPress : (id)sender
 {
-    [helpButton setAlpha:0.9];
     [self stopAnimation];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Contact"
+                                   inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    self.contactArray = [context executeFetchRequest:fetchRequest error:&error];
+    
     MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
     [textComposer setMessageComposeDelegate:self];
     
@@ -301,23 +276,30 @@
 
 - (IBAction)buttonTouchDown:(id)sender {
     [self startAnimation];
-    [helpButton setAlpha:0.6];
     //start animations
 }
 
 - (IBAction)buttonDragOutside:(id)sender {
-    [helpButton setAlpha:0.9];
     [self stopAnimation];
     //cancel animation
 }
 
 -(void)startAnimation
 {
-    NSLog(@"start animation");
+    backgroundView.hidden = NO;
+    [UIView beginAnimations:@"animationOff" context:NULL];
+    [UIView setAnimationDuration:2.4f];
+    [backgroundView setFrame:CGRectMake(95, 316, 130, 1)];
+    [UIView commitAnimations];
 }
 
 -(void)stopAnimation
 {
+    backgroundView.hidden = YES;
+    [UIView beginAnimations:@"animationOff" context:NULL];
+    [UIView setAnimationDuration:0.0f];
+    [backgroundView setFrame:CGRectMake(95, 143, 130, 173)];
+    [UIView commitAnimations];
     NSLog(@"stop animation");
 }
 @end

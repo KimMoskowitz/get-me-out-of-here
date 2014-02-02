@@ -14,6 +14,7 @@
 
 @interface MKButtonViewController :MKDataViewController <MFMessageComposeViewControllerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
 
 @property (strong, nonatomic) NSArray *contactArray;
