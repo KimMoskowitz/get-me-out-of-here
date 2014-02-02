@@ -48,7 +48,18 @@
     [fetchRequest setEntity:entity];
     NSError *error;
     contactsArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
-
+    
+//    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[context executeFetchRequest:fetchRequest error:&error]];
+//    for(Contact *contact in tempArray)
+//    {
+//        Contact *newC = [[Contact alloc] init];
+//        [newC setFirstName:contact.firstName];
+//        [newC setLastName:contact.lastName];
+//        [newC setFullName:contact.fullName];
+//        [newC setPhone:contact.phone];
+//        [contactsArray addObject:newC];
+//    }
+//
 //    [self.table setDelegate:myTableDelegate];
 //    [self.table setDataSource:myTableDelegate];
 
@@ -198,17 +209,6 @@
     // Copy the e-mail value into a string.
     NSString *phone = (__bridge NSString *)ABMultiValueCopyValueAtIndex(multivalue, index);
     
-    // Create a temp array in which we'll add all the desired values.
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    [tempArray addObject:fullName];
-    
-
-    [tempArray addObject:phone];
-    
-    
-    // Now add the tempArray into the contactsArray.
-    [contactsArray addObject:tempArray];
-    
     Contact *newContact = [NSEntityDescription
                      insertNewObjectForEntityForName:@"Contact"
                      inManagedObjectContext:self.managedObjectContext];
@@ -217,11 +217,12 @@
     [newContact setFullName:fullName];
     [newContact setPhone:phone];
     NSError *error;
+    [contactsArray addObject:newContact];
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     
-    [contactsArray addObject:newContact];
+
     
     
     NSManagedObjectContext *context = [self managedObjectContext];

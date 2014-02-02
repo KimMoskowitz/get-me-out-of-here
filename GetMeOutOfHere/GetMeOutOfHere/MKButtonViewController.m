@@ -83,7 +83,44 @@
     // Dispose of any resources that can be recreated.
 }
 
+<<<<<<< HEAD
 
+=======
+- (IBAction)helpButtonAction:(id)sender {
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Contact"
+                                   inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    self.contactArray = [context executeFetchRequest:fetchRequest error:&error];
+    
+    MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
+    [textComposer setMessageComposeDelegate:self];
+    
+    NSMutableArray *numbersTemp = [[NSMutableArray alloc] init];
+    for(Contact *contact in contactArray)
+    {
+        [numbersTemp addObject:contact.phone];
+    }
+    
+    NSArray *numbers = [numbersTemp copy];
+    
+    NSString *myLocation = @"I'm at ";
+    myLocation = [myLocation stringByAppendingString:locationName];
+    myLocation = [myLocation stringByAppendingString:@" ("];
+    myLocation = [myLocation stringByAppendingString:myLatitude];
+    myLocation = [myLocation stringByAppendingString:@", "];
+    myLocation = [myLocation stringByAppendingString:myLongitude];
+    myLocation = [myLocation stringByAppendingString:@"). Please get me out of here"];
+    
+    [textComposer setRecipients:numbers];
+    [textComposer setBody:myLocation];
+    [self presentViewController:textComposer animated:YES completion:NULL];
+}
+>>>>>>> d794bc3717460d9307b10edded92294acfd9af4a
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -105,7 +142,7 @@
     
     // Reverse Geocoding
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        //NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
             locationName = [NSString stringWithFormat:@"%@ %@, %@, %@",
