@@ -15,6 +15,11 @@
 
 @implementation MKButtonViewController
 @synthesize helpButton;
+@synthesize contactArray;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +39,17 @@
     [btnLayer setCornerRadius:2.0f];
     //change button size and press down color
     
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Contact"
+                                   inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    self.contactArray = [context executeFetchRequest:fetchRequest error:&error];
+
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -47,7 +63,15 @@
     MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
     [textComposer setMessageComposeDelegate:self];
     
-    [textComposer setRecipients:[NSArray arrayWithObjects:/*something here,*/ nil]];
+    NSMutableArray *numbersTemp = [[NSMutableArray alloc] init];
+    for(Contact *contact in contactArray)
+    {
+        [numbersTemp addObject:contact.phone];
+    }
+    
+    NSArray *numbers = [numbersTemp copy];
+    
+    [textComposer setRecipients:numbers];
     [textComposer setBody:@"I'm at XYZ. Please get me out of here"];
     [self presentViewController:textComposer animated:YES completion:NULL];
 }
@@ -56,4 +80,113 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Oops!"
+                                                           message:@"There was a problem with this app \n try closing me and starting again"
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"Sorry!"
+                                                 otherButtonTitles:nil,nil];
+            [alert show];
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }
+    }
+}
+
+#pragma mark - Core Data stack
+
+// Returns the managed object context for the application.
+// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _managedObjectContext;
+}
+
+// Returns the managed object model for the application.
+// If the model doesn't already exist, it is created from the application's model.
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+// Returns the persistent store coordinator for the application.
+// If the coordinator doesn't already exist, it is created and the application's store added to it.
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Model.sqlite"];
+    
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        
+        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+        
+        /*
+         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
+         
+         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+         
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+#pragma mark - Application's Documents directory
+
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++
+//Helpful for us to delete all data in a model when called
+//+++++++++++++++++++++++++++++++++++++++++++++
+- (void) deleteAllObjects: (NSString *) entityDescription  {
+    NSFetchRequest * allEntities = [[NSFetchRequest alloc] init];
+    [allEntities setEntity:[NSEntityDescription
+                            entityForName:entityDescription
+                            inManagedObjectContext:self.managedObjectContext]];
+    [allEntities setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    NSError * error = nil;
+    NSArray * events = [self.managedObjectContext executeFetchRequest:allEntities error:&error];
+    //[allEntities release];
+    //error handling goes here
+    for (NSManagedObject * event in events) {
+        [self.managedObjectContext deleteObject:event];
+    }
+    NSError *saveError = nil;
+    [self.managedObjectContext save:&saveError];
+    //more error handling here
+}
+
+
 @end
