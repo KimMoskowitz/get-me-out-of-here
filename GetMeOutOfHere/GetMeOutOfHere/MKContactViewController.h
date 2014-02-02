@@ -7,7 +7,6 @@
 //
 
 #import "MKDataViewController.h"
-#import "MKContact.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "Contact.h"
@@ -15,7 +14,7 @@
 @interface MKContactViewController : MKDataViewController <ABPeoplePickerNavigationControllerDelegate> 
 
 @property (nonatomic, retain) IBOutlet UITableView *table;
-@property (nonatomic, retain) NSMutableArray *contactsArray;
+@property (strong, nonatomic, retain) NSMutableArray *contactsArray;
 
 // The contacts object will allow us to access the device contacts.
 @property (nonatomic, retain) ABPeoplePickerNavigationController *contacts;

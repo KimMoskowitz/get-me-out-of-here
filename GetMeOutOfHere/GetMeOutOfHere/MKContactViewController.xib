@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MKContactViewController">
             <connections>
+                <outlet property="table" destination="4qX-2i-3EW" id="9r2-05-vAL"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

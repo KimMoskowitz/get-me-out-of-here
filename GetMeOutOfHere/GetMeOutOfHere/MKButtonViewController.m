@@ -77,6 +77,15 @@
 
 - (IBAction)helpButtonAction:(id)sender {
     
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Contact"
+                                   inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    self.contactArray = [context executeFetchRequest:fetchRequest error:&error];
+    
     MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
     [textComposer setMessageComposeDelegate:self];
     
@@ -121,7 +130,7 @@
     
     // Reverse Geocoding
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        //NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
             locationName = [NSString stringWithFormat:@"%@ %@, %@, %@",
