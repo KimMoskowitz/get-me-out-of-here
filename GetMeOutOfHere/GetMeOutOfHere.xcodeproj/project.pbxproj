@@ -27,6 +27,11 @@
 		E0235019189DA0ED008B410A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0234FF5189DA0ED008B410A /* UIKit.framework */; };
 		E0235021189DA0ED008B410A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E023501F189DA0ED008B410A /* InfoPlist.strings */; };
 		E0235023189DA0ED008B410A /* GetMeOutOfHereTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E0235022189DA0ED008B410A /* GetMeOutOfHereTests.m */; };
+		E0700FF1189DD1E80061247C /* MKContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0700FEF189DD1E80061247C /* MKContactViewController.m */; };
+		E0700FF2189DD1E80061247C /* MKContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0700FF0189DD1E80061247C /* MKContactViewController.xib */; };
+		E0700FF5189DD3050061247C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0700FF3189DD3050061247C /* AddressBook.framework */; };
+		E0700FF6189DD3050061247C /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0700FF4189DD3050061247C /* AddressBookUI.framework */; };
+		E0700FFA189DE1890061247C /* MKContact.m in Sources */ = {isa = PBXBuildFile; fileRef = E0700FF9189DE1890061247C /* MKContact.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,13 @@
 		E023501E189DA0ED008B410A /* GetMeOutOfHereTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GetMeOutOfHereTests-Info.plist"; sourceTree = "<group>"; };
 		E0235020189DA0ED008B410A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E0235022189DA0ED008B410A /* GetMeOutOfHereTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMeOutOfHereTests.m; sourceTree = "<group>"; };
+		E0700FEE189DD1E80061247C /* MKContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKContactViewController.h; sourceTree = "<group>"; };
+		E0700FEF189DD1E80061247C /* MKContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKContactViewController.m; sourceTree = "<group>"; };
+		E0700FF0189DD1E80061247C /* MKContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MKContactViewController.xib; sourceTree = "<group>"; };
+		E0700FF3189DD3050061247C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		E0700FF4189DD3050061247C /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		E0700FF8189DE1890061247C /* MKContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKContact.h; sourceTree = "<group>"; };
+		E0700FF9189DE1890061247C /* MKContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKContact.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0700FF5189DD3050061247C /* AddressBook.framework in Frameworks */,
+				E0700FF6189DD3050061247C /* AddressBookUI.framework in Frameworks */,
 				99F5E103189DBB5D008BC16D /* MessageUI.framework in Frameworks */,
 				E0234FF4189DA0ED008B410A /* CoreGraphics.framework in Frameworks */,
 				E0234FF6189DA0ED008B410A /* UIKit.framework in Frameworks */,
@@ -96,7 +110,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99F5E109189DBEB0008BC16D /* button */ = {
+		99F5E109189DBEB0008BC16D /* Button */ = {
 			isa = PBXGroup;
 			children = (
 				99F5E104189DBEA4008BC16D /* MKButtonViewController.h */,
@@ -105,7 +119,7 @@
 				99F5E10D189DCCC3008BC16D /* MKHelpButton.h */,
 				99F5E10E189DCCC3008BC16D /* MKHelpButton.m */,
 			);
-			name = button;
+			name = Button;
 			sourceTree = "<group>";
 		};
 		E0234FE5189DA0ED008B410A = {
@@ -130,6 +144,8 @@
 		E0234FF0189DA0ED008B410A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E0700FF3189DD3050061247C /* AddressBook.framework */,
+				E0700FF4189DD3050061247C /* AddressBookUI.framework */,
 				99F5E102189DBB5D008BC16D /* MessageUI.framework */,
 				E0234FF1189DA0ED008B410A /* Foundation.framework */,
 				E0234FF3189DA0ED008B410A /* CoreGraphics.framework */,
@@ -151,7 +167,9 @@
 				E0235009189DA0ED008B410A /* MKModelController.h */,
 				E023500A189DA0ED008B410A /* MKModelController.m */,
 				E023500C189DA0ED008B410A /* Main.storyboard */,
-				99F5E109189DBEB0008BC16D /* button */,
+				E0700FF7189DE1410061247C /* Model */,
+				E0700FED189DD0430061247C /* Contacts */,
+				99F5E109189DBEB0008BC16D /* Button */,
 				E023500F189DA0ED008B410A /* Images.xcassets */,
 				E0234FF8189DA0ED008B410A /* Supporting Files */,
 			);
@@ -185,6 +203,25 @@
 				E023501F189DA0ED008B410A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E0700FED189DD0430061247C /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				E0700FEE189DD1E80061247C /* MKContactViewController.h */,
+				E0700FEF189DD1E80061247C /* MKContactViewController.m */,
+				E0700FF0189DD1E80061247C /* MKContactViewController.xib */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		E0700FF7189DE1410061247C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0700FF8189DE1890061247C /* MKContact.h */,
+				E0700FF9189DE1890061247C /* MKContact.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +303,7 @@
 			files = (
 				E0235010189DA0ED008B410A /* Images.xcassets in Resources */,
 				E0234FFC189DA0ED008B410A /* InfoPlist.strings in Resources */,
+				E0700FF2189DD1E80061247C /* MKContactViewController.xib in Resources */,
 				99F5E108189DBEA4008BC16D /* MKButtonViewController.xib in Resources */,
 				E023500E189DA0ED008B410A /* Main.storyboard in Resources */,
 			);
@@ -293,6 +331,8 @@
 				99F5E10F189DCCC3008BC16D /* MKHelpButton.m in Sources */,
 				E0235008189DA0ED008B410A /* MKDataViewController.m in Sources */,
 				E0234FFE189DA0ED008B410A /* main.m in Sources */,
+				E0700FF1189DD1E80061247C /* MKContactViewController.m in Sources */,
+				E0700FFA189DE1890061247C /* MKContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

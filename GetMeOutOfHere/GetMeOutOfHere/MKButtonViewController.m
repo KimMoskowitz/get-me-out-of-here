@@ -44,6 +44,5 @@
 }
 
 - (IBAction)helpButtonAction:(id)sender {
-    MFMessageComposeViewController
-}
+   }
 @end

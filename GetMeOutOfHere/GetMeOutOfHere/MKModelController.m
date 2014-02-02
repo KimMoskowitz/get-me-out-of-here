@@ -8,6 +8,7 @@
 
 #import "MKModelController.h"
 #import "MKButtonViewController.h"
+#import "MKContactViewController.h"
 #import "MKDataViewController.h"
 
 /*
@@ -47,7 +48,7 @@
     MKDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"MKDataViewController"];
 //    dataViewController.dataObject = self.pageData[index];
     
-    dataViewController = [[MKButtonViewController alloc]init];
+    dataViewController = [[MKContactViewController alloc]init];
     
     return dataViewController;
 }
