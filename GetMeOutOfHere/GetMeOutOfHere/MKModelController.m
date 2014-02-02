@@ -10,6 +10,7 @@
 #import "MKButtonViewController.h"
 #import "MKContactViewController.h"
 #import "MKDataViewController.h"
+#import "MKMessageViewController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -34,7 +35,9 @@
         // Create the data model.
         MKButtonViewController *buttonVC = [[MKButtonViewController alloc]init];
         MKContactViewController *contactVC = [[MKContactViewController alloc]init];
-        _pageData = @[buttonVC,contactVC];
+        MKMessageViewController *messageVC = [[MKMessageViewController alloc]init];
+        
+        _pageData = @[messageVC,buttonVC,contactVC];
     }
     return self;
 }
@@ -50,12 +53,22 @@
     dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"MKDataViewController"];
 //    dataViewController.dataObject = self.pageData[index];
     
+    NSLog(@"INDEX: %u", index);
+    
     if (index == 0) {
+        dataViewController = [[MKMessageViewController alloc]init];
+    }
+    else if (index == 1) {
         dataViewController = [[MKButtonViewController alloc]init];
     }
-    if (index == 1) {
+    else if (index == 2) {
         dataViewController = [[MKContactViewController alloc]init];
     }
+    else {
+        return nil;
+    }
+    
+    dataViewController.pageIndex = index;
     
     return dataViewController;
 }
@@ -72,6 +85,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     NSUInteger index = (dataViewController.pageIndex);
+    NSLog(@"BEFORE INDEX: %u", index);
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -82,11 +96,11 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
+    NSLog(@"AFTER INDEX: %u", index);
     NSUInteger index = (dataViewController.pageIndex);
     if (index == NSNotFound) {
         return nil;
     }
-    
     index++;
     if (index == [self.pageData count]) {
         return nil;

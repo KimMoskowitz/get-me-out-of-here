@@ -14,7 +14,8 @@
 
 @interface MKButtonViewController :MKDataViewController <MFMessageComposeViewControllerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
-- (IBAction)helpButtonAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+
 
 @property (strong, nonatomic) NSArray *contactArray;
 
@@ -25,5 +26,11 @@
 @property (strong, nonatomic) NSString *myLongitude;
 
 
+//%%% button stuff
+- (IBAction)buttonTouchDown:(id)sender;
+- (IBAction)buttonDragOutside:(id)sender;
+- (IBAction)helpButtonAction:(id)sender;
 
+-(void)startAnimation;
+-(void)stopAnimation;
 @end
