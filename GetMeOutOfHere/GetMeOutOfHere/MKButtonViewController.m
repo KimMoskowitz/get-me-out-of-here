@@ -13,12 +13,19 @@
 
 @end
 
-@implementation MKButtonViewController
+@implementation MKButtonViewController{
+    CLLocationManager *locationManager;
+    CLGeocoder *geocoder;
+    CLPlacemark *placemark;
+    NSString *locationName;
+}
 @synthesize helpButton;
 @synthesize contactArray;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize myLongitude;
+@synthesize myLatitude;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +41,15 @@
 {
     [super viewDidLoad];
 
+    locationManager = [[CLLocationManager alloc]init];
+    
+    //%%% location stuff
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+    geocoder = [[CLGeocoder alloc] init];
+    
+    
     CALayer *btnLayer = [helpButton layer];
     [btnLayer setMasksToBounds:YES];
     [btnLayer setCornerRadius:2.0f];
@@ -60,6 +76,7 @@
 }
 
 - (IBAction)helpButtonAction:(id)sender {
+    
     MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc]init];
     [textComposer setMessageComposeDelegate:self];
     
@@ -71,9 +88,49 @@
     
     NSArray *numbers = [numbersTemp copy];
     
+    NSString *myLocation = @"I'm at ";
+    myLocation = [myLocation stringByAppendingString:locationName];
+    myLocation = [myLocation stringByAppendingString:@" ("];
+    myLocation = [myLocation stringByAppendingString:myLatitude];
+    myLocation = [myLocation stringByAppendingString:@", "];
+    myLocation = [myLocation stringByAppendingString:myLongitude];
+    myLocation = [myLocation stringByAppendingString:@"). Please get me out of here"];
+    
     [textComposer setRecipients:numbers];
-    [textComposer setBody:@"I'm at XYZ. Please get me out of here"];
+    [textComposer setBody:myLocation];
     [self presentViewController:textComposer animated:YES completion:NULL];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+    
+    if (currentLocation != nil) {
+        myLongitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        myLatitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+    }
+    
+    // Reverse Geocoding
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        if (error == nil && [placemarks count] > 0) {
+            placemark = [placemarks lastObject];
+            locationName = [NSString stringWithFormat:@"%@ %@, %@, %@",
+                                 placemark.subThoroughfare, placemark.thoroughfare, placemark.locality,
+                                 placemark.administrativeArea];
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    } ];
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result

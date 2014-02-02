@@ -10,8 +10,9 @@
 #import "MKDataViewController.h"
 #import "MessageUI/MessageUI.h"
 #import "Contact.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface MKButtonViewController :MKDataViewController <MFMessageComposeViewControllerDelegate>
+@interface MKButtonViewController :MKDataViewController <MFMessageComposeViewControllerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
 - (IBAction)helpButtonAction:(id)sender;
 
@@ -20,6 +21,8 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSString *myLatitude;
+@property (strong, nonatomic) NSString *myLongitude;
 
 
 
