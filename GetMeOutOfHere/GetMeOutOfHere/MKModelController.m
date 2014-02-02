@@ -25,14 +25,16 @@
 @end
 
 @implementation MKModelController
+@synthesize dataViewController;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+        MKButtonViewController *buttonVC = [[MKButtonViewController alloc]init];
+        MKContactViewController *contactVC = [[MKContactViewController alloc]init];
+        _pageData = @[buttonVC,contactVC];
     }
     return self;
 }
@@ -45,10 +47,15 @@
     }
     
     // Create a new view controller and pass suitable data.
-    MKDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"MKDataViewController"];
+    dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"MKDataViewController"];
 //    dataViewController.dataObject = self.pageData[index];
     
-    dataViewController = [[MKContactViewController alloc]init];
+    if (index == 0) {
+        dataViewController = [[MKButtonViewController alloc]init];
+    }
+    if (index == 1) {
+        dataViewController = [[MKContactViewController alloc]init];
+    }
     
     return dataViewController;
 }
@@ -64,7 +71,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(MKDataViewController *)viewController];
+    NSUInteger index = (dataViewController.pageIndex);
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -75,7 +82,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(MKDataViewController *)viewController];
+    NSUInteger index = (dataViewController.pageIndex);
     if (index == NSNotFound) {
         return nil;
     }

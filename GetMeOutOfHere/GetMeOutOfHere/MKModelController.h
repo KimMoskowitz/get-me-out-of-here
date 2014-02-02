@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKDataViewController.h"
 
 @class MKDataViewController;
 
@@ -14,5 +15,6 @@
 
 - (MKDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(MKDataViewController *)viewController;
+@property (strong, nonatomic) MKDataViewController *dataViewController;
 
 @end

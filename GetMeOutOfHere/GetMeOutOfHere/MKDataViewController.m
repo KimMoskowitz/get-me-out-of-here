@@ -14,10 +14,12 @@
 @end
 
 @implementation MKDataViewController
+@synthesize pageIndex;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    pageIndex = 0;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
